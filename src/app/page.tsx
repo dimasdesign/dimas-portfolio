@@ -1,27 +1,48 @@
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import Image from "next/image";
+import ImageGallery from "./gallery/ImageGalley";
 
 export default function Home() {
   return (
+    <main className="min-h-screen bg-neutral-700">
+      <Header />
+
+      <h1 className="text-3xl font-bold text-center py-8">Infinite Scroll Gallery</h1>
+      <ImageGallery />
+
+      <Footer />
+    </main>
+  )
+
+  return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
+        <div
+          className="grid grid-cols-2 grid-rows-1 gap-4"
+          >
+          <Image
+            src="/images/campanha_publicitaria-Recuperado.png"
+            alt="Fossil"
+            width={180}
+            height={38}
+            priority
+            />
+          <Image
+            className="dark:invert"
+            src="/images/campanha_publicitaria-Recuperado.png"
+            alt="Inverted Fossil"
+            width={180}
+            height={38}
+            priority
+            />
+        </div>
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
+            Projeto de campanha Publicitaria para a marca de relógios Fossil.
           </li>
           <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
+            Fotografia e design próprios.
           </li>
         </ol>
 
