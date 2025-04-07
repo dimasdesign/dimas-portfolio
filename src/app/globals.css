@@ -24,3 +24,17 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+::-moz-selection { /* Selection do firefox 1? */
+  color: cyan;
+  background: crimson;
+}
+::-webkit-selection { /* webkit?? */
+  color: cyan;
+  background: crimson;
+}
+::selection { /* Edge 12, Firefox 62, Safari 1, Chrome 1, IE 9, Opera 9 */
+  color: cyan;
+  background: crimson;
+}
