@@ -49,17 +49,28 @@ export default function ImageGallery() {
     return (
         <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">Meus Projetos</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4">
-                {images.map((src, i) => (
-                    <a href={`/projetos/${encodeURIComponent(src.split('/').pop()?.split('.')[0] || '')}`} key={i} className="relative aspect-video">
-                        <Image
-                            src={src}
-                            alt={`Projeto ${i + 1}`}
-                            fill
-                            className="w-full h-60 object-cover rounded-lg shadow-md hover:scale-105 transition-transform"
-                        />
-                    </a>
-                ))}
+
+            <div className="columns-2 sm:columns-3 md:columns-4 gap-4 space-y-4"> {/* Mude as columns-n para a quantidade de colunas. Isso altera o tamanho das imagens */}
+              {images.map((src, i) => {
+                const slug = encodeURIComponent(src.split('/').pop()?.split('.')[0] || '');
+                return (
+                  <a
+                    href={`/projetos/${slug}`}
+                    key={i}
+                    className="block mx-auto break-inside-avoid overflow-hidden rounded-lg shadow-md hover:scale-[1.02] transition-transform"
+                  >
+                    <Image
+                      src={src}
+                      alt={`Projeto ${i + 1}`}
+                      width={600} // controla o tamanho visual
+                      height={400}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="w-full h-auto object-cover rounded"
+                      placeholder="empty" // Você pode usar 'blur' se quiser gerar previews
+                    />
+                  </a>
+                );
+              })}
             </div>
 
             {loading && <p className="text-center mt-4">Carregando...</p>}
