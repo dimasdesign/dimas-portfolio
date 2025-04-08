@@ -5,6 +5,11 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 const IMAGES_PER_PAGE = 10;
 
+type ImageData = {
+    src: string;
+    category: string;
+};
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const page = parseInt(req.query.page as string) || 1;
 
@@ -16,7 +21,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const start = (page - 1) * IMAGES_PER_PAGE;
     const end   = start + IMAGES_PER_PAGE;
 
-    const images = allImages.slice(start, end).map(name => `/images/${name}`);
+    const images: ImageData[] = allImages.slice(start, end).map((file) => {
+        const match = file.match(/^([^-]+)-.+$/);
+        const category = match ? match[1] : 'outros';
 
-    res.status(200).json({ images, hasMore: end < allImages.length });
+        return {
+            src: `/images/${file}`,
+            category,
+        };
+    });
+
+    res.status(200).json({
+        images,
+        hasMore: end < allImages.length,
+    });
 }

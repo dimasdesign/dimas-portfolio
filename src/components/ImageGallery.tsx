@@ -3,12 +3,25 @@
 import Image from 'next/image';
 import { useEffect, useState, useRef, useCallback } from 'react';
 
+type ImageData = {
+    src: string;
+    category: string;
+}
+
 export default function ImageGallery() {
-    const [images, setImages] = useState<string[]>([]);
+    const [images, setImages] = useState<ImageData[]>([]);
+    const [categoriaAtiva, setCategoriaAtiva] = useState<string>('todas');
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
     const [loading, setLoading] = useState(false);
     const loader = useRef<HTMLDivElement | null>(null);
+
+    const imagensFiltradas = categoriaAtiva === 'todas'
+        ? images
+        : images.filter(img => img.category === categoriaAtiva);
+
+    const categoriasUnicas = Array.from(new Set(images.map(img => img.category)));
+    const categorias = ['todas', ...categoriasUnicas];
 
     const fetchImages = async (page: number) => {
         setLoading(true);
@@ -50,27 +63,42 @@ export default function ImageGallery() {
         <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">Meus Projetos</h1>
 
+            <div className="flex gap-2 flex-wrap mb-4">
+                {categorias.map(cat => (
+                    <button
+                    key={cat}
+                    onClick={() => setCategoriaAtiva(cat)}
+                    className={`px-3 py-1 rounded border capitalize ${
+                        categoriaAtiva === cat
+                        ? 'bg-blue-500 text-white'
+                        : 'bg-white text-gray-800'
+                    }`}
+                    >
+                    {cat}
+                    </button>
+                ))}
+            </div>
+
             <div className="columns-2 sm:columns-3 md:columns-4 gap-4 space-y-4"> {/* Mude as columns-n para a quantidade de colunas. Isso altera o tamanho das imagens */}
-              {images.map((src, i) => {
-                const slug = encodeURIComponent(src.split('/').pop()?.split('.')[0] || '');
-                return (
-                  <a
-                    href={`/projetos/${slug}`}
-                    key={i}
-                    className="block mx-auto break-inside-avoid overflow-hidden rounded-lg shadow-md hover:scale-[1.02] transition-transform"
-                  >
-                    <Image
-                      src={src}
-                      alt={`Projeto ${i + 1}`}
-                      width={600} // controla o tamanho visual
-                      height={400}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="w-full h-auto object-cover rounded"
-                      placeholder="empty" // Você pode usar 'blur' se quiser gerar previews
-                    />
-                  </a>
-                );
-              })}
+                {imagensFiltradas.map((img, i) => {
+                    const slug = encodeURIComponent(img.src.split('/').pop()?.split('.')[0] || '');
+                    return (
+                        <a
+                            href={`/projetos/${slug}`}
+                            key={i}
+                            className="block break-inside-avoid overflow-hidden rounded-lg shadow-md hover:scale-[1.02] transition-transform"
+                        >
+                        <Image
+                            src={img.src}
+                            alt={`Projeto ${i + 1}`}
+                            width={400}
+                            height={600}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className="w-full h-auto object-cover rounded"
+                        />
+                        </a>
+                    );
+                })}
             </div>
 
             {loading && <p className="text-center mt-4">Carregando...</p>}
