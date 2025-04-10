@@ -2,10 +2,12 @@
 
 import Image from 'next/image';
 import { useEffect, useState, useRef, useCallback } from 'react';
+import CustomVideoCard from './VideoCard';
 
 type ImageData = {
     src: string;
     category: string;
+    type: 'image' | 'video';
 }
 
 export default function ImageGallery() {
@@ -27,7 +29,7 @@ export default function ImageGallery() {
         setLoading(true);
         const res = await fetch(`/api/images?page=${page}`);
         const data = await res.json();
-        setImages(prev => [...prev, ...data.images]);
+        setImages(prev => [...prev, ...data.media]);
         setHasMore(data.hasMore);
         setLoading(false);
     };
@@ -88,14 +90,18 @@ export default function ImageGallery() {
                             key={i}
                             className="block break-inside-avoid overflow-hidden rounded-lg shadow-md hover:scale-[1.02] transition-transform"
                         >
-                        <Image
-                            src={img.src}
-                            alt={`Projeto ${i + 1}`}
-                            width={400}
-                            height={600}
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="w-full h-auto object-cover rounded"
-                        />
+                            {img.type === 'image' ? (
+                                <Image
+                                    src={img.src}
+                                    alt={`Projeto ${i + 1}`}
+                                    width={400}
+                                    height={600}
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    className="w-full h-auto object-cover rounded"
+                                />
+                            ) : (
+                                <CustomVideoCard src={img.src} poster='' />
+                            )}
                         </a>
                     );
                 })}
