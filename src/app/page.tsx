@@ -4,7 +4,7 @@ import ImageGallery from "@/components/ImageGallery";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-neutral-700">
+    <main className="min-h-screen bg-[#3B1C32]">
       <Header />
 
       <h1 className="text-3xl text-pink-600 font-bold text-center py-8">Dimas P. F. Neto</h1>

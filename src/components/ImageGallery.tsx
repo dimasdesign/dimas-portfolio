@@ -63,15 +63,15 @@ export default function ImageGallery() {
         <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">Meus Projetos</h1>
 
-            <div className="flex gap-2 flex-wrap mb-4">
+            <div className="flex justify-center items-center gap-2 flex-wrap mb-4">
                 {categorias.map(cat => (
                     <button
                     key={cat}
                     onClick={() => setCategoriaAtiva(cat)}
-                    className={`px-3 py-1 rounded border capitalize ${
+                    className={`px-3 py-1 rounded capitalize hover:bg-pink-600 ${
                         categoriaAtiva === cat
-                        ? 'bg-blue-500 text-white'
-                        : 'bg-white text-gray-800'
+                        ? 'bg-transparent text-neutral-100' // Selecionado
+                        : 'bg-transparent text-cyan-500'   // Idle
                     }`}
                     >
                     {cat}
