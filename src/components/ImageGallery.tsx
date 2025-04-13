@@ -72,8 +72,8 @@ export default function ImageGallery() {
                     onClick={() => setCategoriaAtiva(cat)}
                     className={`px-3 py-1 rounded capitalize hover:bg-pink-600 ${
                         categoriaAtiva === cat
-                        ? 'bg-transparent text-neutral-100' // Selecionado
-                        : 'bg-transparent text-cyan-500'   // Idle
+                        ? 'bg-transparent text-[#FBF5E0]' // Selecionado
+                        : 'bg-transparent text-[#FBF5E0]'   // Idle
                     }`}
                     >
                     {cat}
