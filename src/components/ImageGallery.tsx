@@ -68,15 +68,16 @@ export default function ImageGallery() {
             <div className="flex justify-center items-center gap-2 flex-wrap mb-4">
                 {categorias.map(cat => (
                     <button
-                    key={cat}
-                    onClick={() => setCategoriaAtiva(cat)}
-                    className={`px-3 py-1 rounded capitalize hover:bg-pink-600 ${
-                        categoriaAtiva === cat
-                        ? 'bg-transparent text-[#FBF5E0]' // Selecionado
-                        : 'bg-transparent text-[#FBF5E0]'   // Idle
-                    }`}
+                        key={cat}
+                        onClick={() => setCategoriaAtiva(cat)}
+                        className={`px-3 py-1 rounded-3xl capitalize hover:bg-[#5603AD] hover:-translate-y-1.5 transition-all duration-240 ease-in-out ${
+                            categoriaAtiva === cat
+                            ? 'bg-transparent border-2 border-[#5603AD] text-[#FBF5E0]' // Selecionado
+                            : 'bg-transparent border-2 border-transparent text-[#FBF5E0]'   // Idle
+                        }`}
+                        id="botao"
                     >
-                    {cat}
+                        {cat}
                     </button>
                 ))}
             </div>
@@ -88,7 +89,7 @@ export default function ImageGallery() {
                         <a
                             href={`/projetos/${slug}`}
                             key={i}
-                            className="block break-inside-avoid overflow-hidden rounded-lg shadow-md hover:scale-[1.02] transition-transform"
+                            className="block break-inside-avoid overflow-hidden rounded-lg shadow-md hover:scale-[1.02] duration-240 transition-transform ease-in-out"
                         >
                             {img.type === 'image' ? (
                                 <Image
