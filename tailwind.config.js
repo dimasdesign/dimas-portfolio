@@ -8,6 +8,7 @@ export const theme = {
   extend: {
     fontFamily: {
       gothic: ['var(--font-gothic)'],
+      monster: ['var(--font-monsterrat)'],
     },
   },
 };

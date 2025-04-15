@@ -8,6 +8,12 @@ const gothic = localFont({
   variable: '--font-gothic',
 });
 
+const monsterrat = localFont({
+  src: './Montserrat-Regular.ttf',
+  display: 'swap',
+  variable: '--font-monsterrat',
+})
+
 export const metadata: Metadata = {
   title: "Dimas Design",
   description: "My portfolio",
@@ -21,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${gothic.variable} antialiased`}
+        className={`${gothic.variable} ${monsterrat.variable} antialiased`}
       >
         {children}
       </body>
