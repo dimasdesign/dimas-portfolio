@@ -63,7 +63,7 @@ export default function ImageGallery() {
 
     return (
         <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Meus Projetos</h1>
+            <h1 className="text-2xl font-bold mb-4 text-[#FBF5E0]">Meus Projetos</h1>
 
             <div className="flex justify-center items-center gap-2 flex-wrap mb-4">
                 {categorias.map(cat => (
