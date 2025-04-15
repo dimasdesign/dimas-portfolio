@@ -77,7 +77,7 @@ export default function ImageGallery() {
                         }`}
                         id='botao'
                     >
-                    {cat}
+                        {cat}
                     </button>
                 ))}
             </div>
