@@ -5,7 +5,8 @@ import localFont from 'next/font/local';
 const gothic = localFont({
   src: './SpecialGothicExpandedOne-Regular.ttf',
   display: 'swap',
-})
+  variable: '--font-gothic',
+});
 
 export const metadata: Metadata = {
   title: "Dimas Design",
@@ -20,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${gothic.className} antialiased`}
+        className={`${gothic.variable} antialiased`}
       >
         {children}
       </body>
